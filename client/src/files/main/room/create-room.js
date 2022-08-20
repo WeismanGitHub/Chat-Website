@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 
 const axios = require('axios').default;
 
-
-function createRoom() {
+function CreateRoom() {
     const navigate = useNavigate();
     
     function onClick(event) {
@@ -13,14 +12,14 @@ function createRoom() {
 
         axios.post('/api/v1/room/create')
         .then(res => {
-            navigate('/room');
+            navigate('/')
         }).catch(error => {
             toast.error(error.response.data.message)
         })
     }
 
-    return <button className='bigButton' onClick={onClick}></button>
+    return <button class='bigButton' onClick={onClick}>Create Room</button>
 }
 
 
-export default createRoom
+export default CreateRoom

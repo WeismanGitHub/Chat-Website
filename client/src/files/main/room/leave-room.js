@@ -20,5 +20,4 @@ function LeaveRoom() {
     return <button className='bigButton' onClick={onClick}>Leave Room</button>
 }
 
-
 export default LeaveRoom

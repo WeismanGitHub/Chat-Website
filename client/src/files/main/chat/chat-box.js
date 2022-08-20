@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getCookie } from '../../../helpers'
 
-function Chat({ socket, gameId }) {
+function ChatBox({ socket, gameId }) {
     const [currentMessage, setCurrentMessage] = useState('')
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        socket.on('receiveMessage', (data) => {
+        socket.on('receive_message', (data) => {
             setMessages((list) => [...list, data]);
         });
 
@@ -26,7 +26,7 @@ function Chat({ socket, gameId }) {
             }
         };
 
-        socket.volatile.emit('sendMessage', messageData);
+        socket.volatile.emit('send_message', messageData);
         setMessages((list) => [...list, { message: currentMessage, userName: 'You' }]);
         setCurrentMessage('');
         }
@@ -55,4 +55,4 @@ function Chat({ socket, gameId }) {
     )
 }
 
-export default Chat;
+export default ChatBox;

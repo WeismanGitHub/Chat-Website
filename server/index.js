@@ -61,7 +61,7 @@ app.use((req, res, next) => {
 })
 
 // routes
-app.use('/api/v1/chat', authenticationMiddleware, roomRouter)
+app.use('/api/v1/room', authenticationMiddleware, roomRouter)
 app.use('/api/v1/user', authenticationMiddleware, userRouter)
 app.use('/api/v1/authentication', authenticationRouter)
 

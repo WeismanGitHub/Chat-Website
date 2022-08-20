@@ -3,7 +3,7 @@ import { cookieExists } from '../helpers'
 import React from 'react';
 
 import Account from './main/account'
-import Room from './main/chat/room'
+import Room from './main/room-and-chat'
 
 function Home() {
     const navigate = useNavigate()

@@ -33,12 +33,12 @@ function UpdateAccount() {
     }
 
     return (
-        <div className='account'>
+        <div>
             <br/>
             Name: {user?.name}
             <br/>
             <br/>
-            <form onSubmit={updateAccountHandler} className='authenticationForm'>
+            <form onSubmit={updateAccountHandler}>
                 <div>Update Account</div>
                 Name:
                 <br/>

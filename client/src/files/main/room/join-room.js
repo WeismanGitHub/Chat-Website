@@ -12,7 +12,7 @@ function JoinRoom() {
         
         axios.post('/api/v1/room/join', { roomId: event.target[0].value })
         .then(res => {
-            navigate('/room');
+            navigate('/');
         }).catch(error => {
             toast.error(error.response.data.message)
         })
@@ -27,6 +27,5 @@ function JoinRoom() {
         </form>
     </div>)
 }
-
 
 export default JoinRoom
