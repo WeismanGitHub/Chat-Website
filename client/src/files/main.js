@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { cookieExists } from '../helpers'
 import React from 'react';
 
-import Account from './account'
-import Room from './room'
+import Account from './main/account'
+import Room from './main/chat/room'
 
 function Home() {
     const navigate = useNavigate()

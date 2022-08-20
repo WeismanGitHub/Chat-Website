@@ -1,10 +1,10 @@
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css'
-import { cookieExists } from '../helpers'
-import { getCookie } from '../helpers'
+import { cookieExists } from '../../../helpers'
+import { getCookie } from '../../../helpers'
 import io from 'socket.io-client';
-import Users from './users'
+import Users from '../../users'
 import Chat from './home/chat'
 import axios from 'axios'
 

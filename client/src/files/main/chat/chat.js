@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getCookie } from '../../helpers'
+import { getCookie } from '../../../helpers'
 
 function Chat({ socket, gameId }) {
     const [currentMessage, setCurrentMessage] = useState('')
