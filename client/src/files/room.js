@@ -2,36 +2,34 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css'
 import { cookieExists } from '../helpers'
-import React, { useState } from 'react';
 import { getCookie } from '../helpers'
 import io from 'socket.io-client';
-import Players from './game/players'
-import Chat from './game/chat'
-import Play from './game/play'
+import Users from './users'
+import Chat from './home/chat'
 import axios from 'axios'
 
-function Game() {
+function Room() {
     const navigate = useNavigate()
 
     React.useEffect(()=> {
-        if (!cookieExists('gameId')) {
+        if (!cookieExists('roomId')) {
             navigate('/')
         }
     }, [])
 
-    const gameId = getCookie('gameId')
+    const roomId = getCookie('roomId')
     const socket = io.connect('/')
-    socket.gameId = gameId
+    socket.roomId = roomId
     
-    socket.emit('joinGame', { gameId: gameId })
+    socket.emit('join_room', { roomId: roomId })
 
-    function leaveGame(event) {
+    function leaveRoom(event) {
         event.preventDefault();
         
-        axios.post('/api/v1/game/leave')
+        axios.post('/api/v1/room/leave')
         .then(res => {
-            socket.emit('updateAllPlayers', { gameId: gameId })
-            socket.emit('leaveGame', { gameId: gameId })
+            socket.emit('update_users', { roomId: roomId })
+            socket.emit('leave_room', { roomId: roomId })
             navigate('/');
         })
         .catch(err => {
@@ -41,7 +39,7 @@ function Game() {
 
     function copyId(event) {
         event.preventDefault()
-        navigator.clipboard.writeText(gameId)
+        navigator.clipboard.writeText(roomId)
         .then(() => {
             toast('Copied!')
         })
@@ -49,15 +47,15 @@ function Game() {
 
     return (
         <>
-            <Chat socket={socket} gameId={gameId}/>
-            <button className='leaveGameButton' onClick={leaveGame}>
-                Leave Game
+            <Chat socket={socket} roomId={roomId}/>
+            <button className='leaveRoomButton' onClick={leaveRoom}>
+                Leave Room
             </button>
-            <button class='copyIdButton' onClick={copyId}>Copy Game ID</button>
-            <Players socket={socket} gameId={gameId}/>
+            <button class='copyIdButton' onClick={copyId}>Copy Room ID</button>
+            <Users socket={socket} roomId={roomId}/>
             <ToastContainer/>
         </>
     )
 }
 
-export default Game;
+export default Room;

@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { cookieExists } from '../helpers'
 import React from 'react';
 
-import AccountRelated from './home/account-related'
-import GameRelated from './home/game-related'
+import Account from './account'
+import Room from './room'
 
 function Home() {
     const navigate = useNavigate()
@@ -16,8 +16,8 @@ function Home() {
 
     return (
         <>
-            <AccountRelated/>
-            <GameRelated/>
+            <Account/>
+            <Room/>
         </>
     )
 }

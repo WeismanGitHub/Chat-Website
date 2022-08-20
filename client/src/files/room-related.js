@@ -4,29 +4,29 @@ import 'react-toastify/dist/ReactToastify.css';
 import { cookieExists } from '../../helpers'
 const axios = require('axios').default;
 
-function GameRelated() {
+function RoomRelated() {
     const navigate = useNavigate();
 
-    function joinGame(event) {
+    function joinRoom(event) {
         event.preventDefault();
         
-        axios.post('/api/v1/game/join', { gameId: event.target[0].value })
+        axios.post('/api/v1/room/join', { roomId: event.target[0].value })
         .then(res => {
-            navigate('/game');
+            navigate('/room');
         }).catch(error => {
             toast.error(error.response.data.message)
         })
     }
 
-    function rejoinGame(event) {
+    function rejoinRoom(event) {
         event.preventDefault()
-        navigate('/game')
+        navigate('/room')
     }
 
-    function leaveGame(event) {
+    function leaveRoom(event) {
         event.preventDefault();
 
-        axios.post('/api/v1/game/leave')
+        axios.post('/api/v1/room/leave')
         .then(res => {
             navigate('/');
         }).catch(error => {
@@ -34,28 +34,28 @@ function GameRelated() {
         })
     }
 
-    function createGame(event) {
+    function createRoom(event) {
         event.preventDefault();
 
-        axios.post('/api/v1/game/create')
+        axios.post('/api/v1/room/create')
         .then(res => {
-            navigate('/game');
+            navigate('/room');
         }).catch(error => {
             toast.error(error.response.data.message)
         })
     }
 
-    if (cookieExists('gameId')) {
+    if (cookieExists('roomId')) {
         return (
             <div className='leftColumn'>
                 <br/>
-                <button className='bigButton' onClick={rejoinGame}>
-                    Rejoin Game
+                <button className='bigButton' onClick={rejoinRoom}>
+                    Rejoin Room
                 </button>
                 <br/>
                 <br/>
-                <button className='bigButton' onClick={leaveGame}>
-                    Leave Game
+                <button className='bigButton' onClick={leaveRoom}>
+                    Leave Room
                 </button>
             </div>
         )
@@ -63,18 +63,18 @@ function GameRelated() {
         return (
             <div className='leftColumn'>
                 <br/>
-                <button className='bigButton' onClick={createGame}>
-                    Create Game
+                <button className='bigButton' onClick={createRoom}>
+                    Create Room
                 </button>
                 <br/>
                 <br/>
                 <div className='entryForm'>
-                    <form onSubmit={joinGame}>
-                        Enter Game Id
+                    <form onSubmit={joinRoom}>
+                        Enter Room Id
                         <br/>
-                        <input type='text' name='gameId' maxlength='24' minlength='24' placeholder='****' />
+                        <input type='text' name='roomId' maxlength='24' minlength='24' placeholder='****' />
                         <br/>
-                        <button type='submit'>Join Game</button>
+                        <button type='submit'>Join Room</button>
                     </form>
                     <ToastContainer/>
                 </div>
@@ -83,4 +83,4 @@ function GameRelated() {
     }
 }
 
-export default GameRelated
+export default RoomRelated

@@ -15,10 +15,10 @@ function Players({ socket, gameId }) {
         })
     }, [])
     
-    socket.emit('updateAllPlayers', { gameId: gameId })
+    socket.emit('update_players', { gameId: gameId })
 
     useEffect(() => {
-        socket.on('sendAllPlayers', (players) => {
+        socket.on('send_players', (players) => {
             setPlayers(players)
         })
 

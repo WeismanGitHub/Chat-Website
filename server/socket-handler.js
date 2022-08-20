@@ -14,7 +14,7 @@ function socketHandler(socket) {
         socket.to(roomId).emit('receiveMessage', { userName: name, message: ' joined!' });
     })
 
-    socket.on('update_all_users', async (data) => {
+    socket.on('update_users', async (data) => {
         const roomId = data.roomId
         const users = await getAllUsersInRoom(roomId)
         .catch(err => {

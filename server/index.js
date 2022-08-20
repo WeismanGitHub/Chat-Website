@@ -11,7 +11,7 @@ const path = require('path');
 const cors = require('cors');
 
 require('express-async-errors');
-require('dotenv').config();
+require("dotenv").config();
 
 // import middleware
 const authenticationMiddleware = require('./middleware/authentication-middleware')

@@ -1,12 +1,10 @@
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DeleteAccount from './delete-account'
 import React, { useState, useEffect } from 'react';
-import Logout from './logout'
-import UserIcon from './user-icon'
+
 const axios = require('axios').default;
 
-function AccountRelated() {
+function UpdateAccount() {
     const [user, setUser] = useState()
 
     useEffect(() => {
@@ -19,8 +17,8 @@ function AccountRelated() {
         }
         fetchUser()
     }, [])
-
-    async function updateUserHandler(event) {
+    
+    async function updateAccountHandler(event) {
         event.preventDefault();
         
         axios.post('/api/v1/user/update', {
@@ -33,20 +31,14 @@ function AccountRelated() {
             toast.error(err.response.data.message)
         })
     }
-    
+
     return (
-        <div className='rightColumn'>
+        <div className='account'>
             <br/>
             Name: {user?.name}
             <br/>
             <br/>
-            <UserIcon/>
-            <br/>
-            <br/>
-            Balance: {user?.balance}
-            <br/>
-            <br/>
-            <form onSubmit={updateUserHandler} className='authenticationForm'>
+            <form onSubmit={updateAccountHandler} className='authenticationForm'>
                 <div>Update Account</div>
                 Name:
                 <br/>
@@ -58,14 +50,8 @@ function AccountRelated() {
                 <br/>
                 <button type='submit'>Update</button>
             </form>
-            <br/>
-            <Logout/>
-            <br/>
-            <br/>
-            <DeleteAccount/>
-            <ToastContainer/>
         </div>
     )
-    }
+}
 
-export default AccountRelated
+export default UpdateAccount
