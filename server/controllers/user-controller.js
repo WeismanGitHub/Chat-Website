@@ -26,10 +26,10 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     const userId = req.user._id
-    const room = await UserSchema.findById(userId).select('-_id roomId').lean()
+    const roomId = (await UserSchema.findById(userId).select('-_id roomId').lean()).roomId
 
-    if (room && Object.keys(room).length) {
-        await removeUserFromRoom(room._id, userId)
+    if (roomId) {
+        await removeUserFromRoom(roomId, userId)
     }
 
     await UserSchema.deleteOne({ _id: userId })
