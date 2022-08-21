@@ -14,7 +14,7 @@ function Users({ socket, roomId }) {
             toast.error(error.response.data.message)
         })
     }, [])
-    
+
     socket.emit('update_users', { roomId: roomId })
 
     useEffect(() => {
