@@ -17,7 +17,7 @@ function JoinRoom() {
             toast.error(error.response.data.message)
         })
     }
-    return (<div className='entryForm'>
+    return (<div class='entryForm'>
         <form onSubmit={onClick}>
             Enter Room Id
             <br/>

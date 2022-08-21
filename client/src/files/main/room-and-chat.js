@@ -21,19 +21,23 @@ function RoomAndChat() {
         return (
             <>
                 <div class='roomAndChat'>
+                    <br/>
                     <ChatBox socket={socket} roomId={roomId}/>
-                    <LeaveRoom/>
-                    <CopyId/>
-                    <ToastContainer/>
+                    <div>
+                        <Users class='users' socket={socket} roomId={roomId}/>
+                    </div>
+                    <div>
+                        <LeaveRoom/>
+                        <CopyId/>
+                    </div>
                 </div>
-                <div class='users'>
-                    <Users socket={socket} roomId={roomId}/>
-                </div>
+                <ToastContainer/>
             </>
         )
     } else {
         return (
-            <div class='chat'>
+            <div class='roomAndChat'>
+                <br/>
                 <CreateRoom/>
                 <br/>
                 <br/>

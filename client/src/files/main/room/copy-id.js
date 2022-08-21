@@ -13,7 +13,7 @@ function CopyId() {
         })
     }
 
-    return <button class='copyIdButton' onClick={onClick}>Copy Room ID</button>
+    return <button class='mediumButton' onClick={onClick}>Copy Room ID</button>
 }
 
 

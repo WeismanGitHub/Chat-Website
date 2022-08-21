@@ -4,22 +4,22 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const axios = require('axios').default;
 
-function Players({ socket, gameId }) {
-    const [players, setPlayers] = useState([]);
+function Users({ socket, roomId }) {
+    const [users, setUsers] = useState([]);
 
     useEffect(()=> {
-        axios.get('/api/v1/game/players').then(res => {
-            setPlayers(res.data)
+        axios.get('/api/v1/room/users').then(res => {
+            setUsers(res.data)
         }).catch(error => {
             toast.error(error.response.data.message)
         })
     }, [])
     
-    socket.emit('update_players', { gameId: gameId })
+    socket.emit('update_users', { roomId: roomId })
 
     useEffect(() => {
-        socket.on('send_players', (players) => {
-            setPlayers(players)
+        socket.on('send_users', (users) => {
+            setUsers(users)
         })
 
         socket.on('connect_error', (err) => {
@@ -28,13 +28,10 @@ function Players({ socket, gameId }) {
     }, [socket]);
 
     return (
-        <div class='playersBox'>
-           {players.map(player => {
+        <div class='users'>
+           {users.map(user => {
                 return (<>
-                    {player.name}
-                    <br/>
-                    <img src={`/api/v1/user/icon/${player.iconId}`} class='lobbyIcon'/>
-                    <br/>
+                    {user.name}
                     <br/>
                 </>)
             })}
@@ -44,4 +41,4 @@ function Players({ socket, gameId }) {
 }
 
 
-export default Players;
+export default Users;

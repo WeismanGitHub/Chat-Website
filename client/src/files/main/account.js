@@ -6,12 +6,10 @@ import Logout from './account/logout'
 
 function Account() {
     return (
-        <div className='account'>
+        <div class='account'>
             <UpdateAccount/>
             <br/>
-            <br/>
             <Logout/>
-            <br/>
             <br/>
             <DeleteAccount/>
             <ToastContainer/>

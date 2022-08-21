@@ -1,6 +1,4 @@
 * {
-    margin: 0;
-    padding: 0;
     background-color: aliceblue;
     border-radius: 4px;
     text-align: center;
@@ -12,9 +10,8 @@ button {
     padding-left: 3px;
     padding-right: 3px;
     height: auto;
-    border: 1px solid rgb(100,125,100);
+    border: 1px black solid;
 }
-
 
 form {
     padding: 5px;
@@ -22,70 +19,41 @@ form {
     padding-right: 15px;
     margin: auto;
     max-width: fit-content;
-    border: 1px solid rgb(100,125,100);
+    border: 1px black solid;
     font-size: 150%;
 }
 
 .roomAndChat {
-    float: left;
-    width: 70%;
-    border: 1px solid rgb(100,125,100);
-    height: 94vh;
-    margin: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 72.5%;
+    border: 1px black solid;
+    height: 97.5vh;
     font-size: 125%;
 }
 
 .account {
     float: right;
     width: 25%;
-    border: 1px solid rgb(100,125,100);
-    height: 94vh;
-    margin: 20px;
+    border: 1px black solid;
+    height: 97.5vh;
     font-size: 125%;
 }
 
 .chatBox {
     float: left;
-    width: 35%;
-    border: 1px solid rgb(100,125,100);
-    height: 80vh;
-    margin: 20px;
-    margin-right: 0px;
+    width: 55%;
+    border: 1px solid black;
+    height: 91vh;
     overflow-wrap: break-word;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
-.leaveRoomButton {
-    float: left;
-    width: 17%;
-    border: 1px solid rgb(100,125,100);
-    position: absolute;
-    top: 84vh;
-    left: 20px;
-    height: 13vh;
-    font-size: 150%;
-}
-
-.copyIdButton {
-    float: left;
-    width: 17%;
-    border: 1px solid rgb(100,125,100);
-    position: absolute;
-    top: 84vh;
-    left: 19.5%;
-    height: 13vh;
-    font-size: 150%;
-}
-
-.usersBox {
-    float: right;
-    width: 60%;
-    border: 1px solid rgb(100,125,100);
-    height: 94vh;
-    margin: 20px;
-    margin-left: 0px;
-    font-size: 150%;
+.users {
+    height: 79.5vh;
+    border: 1px solid black;
+    padding: 15px;
 }
 
 .bigButton {
@@ -97,9 +65,9 @@ form {
 
 .mediumButton {
     font-size: 125%;
-    padding: 12.5px;
-    padding-left: 25px;
-    padding-right: 25px;
+    width: 200px;
+    height: 50px;
+    margin: 5px;
 }
 
 button:active {

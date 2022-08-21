@@ -29,14 +29,11 @@ function socketHandler(socket) {
     })
 
     socket.on('send_message', (data) => {
-        console.log(data.token)
-        delete data.token
         socket.to(data.roomId).emit('receiveMessage', {...data, userName: name });
     });
 
     socket.on('leave_room', async (data) => {
         const roomId = data.roomId
-        delete data.token
         socket.to(roomId).emit('receiveMessage', { userName: name, message: 'Left!' })
         socket.leave(roomId)
     })

@@ -2,7 +2,7 @@ const RoomSchema = require('./schemas/room-schema')
 const UserSchema = require('./schemas/user-schema')
 
 async function getAllUsersInRoom(roomId) {
-    const userIds = (await RoomSchema.findById(roomId).select('-_id users').lean())?.userIds
+    const userIds = (await RoomSchema.findById(roomId).select('-_id userIds').lean())?.userIds
     
     if (!userIds) {
         throw new Error('Room does not exist.')
