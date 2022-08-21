@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const axios = require('axios').default;
 
-function Users({ socket, roomId }) {
+function Users({ socket }) {
     const [users, setUsers] = useState([]);
 
     useEffect(()=> {
@@ -14,8 +14,6 @@ function Users({ socket, roomId }) {
             toast.error(error.response.data.message)
         })
     }, [])
-
-    socket.emit('update_users', { roomId: roomId })
 
     useEffect(() => {
         socket.on('send_users', (users) => {

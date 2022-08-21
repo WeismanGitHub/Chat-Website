@@ -4,13 +4,14 @@ import 'react-toastify/dist/ReactToastify.css';
 const axios = require('axios').default;
 
 
-function DeleteAccount() {
+function DeleteAccount({ socket, roomId }) {
     const navigate = useNavigate();
 
     function onClick(event) {
         event.preventDefault();
 
         if (window.confirm('Do you want to delete your account?')) {
+            socket.emit('leave_room', { roomId: roomId })
             axios.post('/api/v1/user/delete')
             .then(res => {
                 navigate('/authentication');

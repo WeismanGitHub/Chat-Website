@@ -9,7 +9,6 @@ function JoinRoom() {
     
     function onClick(event) {
         event.preventDefault();
-        
         axios.post('/api/v1/room/join', { roomId: event.target[0].value })
         .then(res => {
             navigate('/');

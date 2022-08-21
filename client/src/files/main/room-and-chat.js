@@ -1,33 +1,27 @@
+import { cookieExists, getCookie } from '../../helpers'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { cookieExists, getCookie } from '../../helpers'
 import CreateRoom from './room/create-room'
 import LeaveRoom from './room/leave-room'
 import JoinRoom from './room/join-room'
-import CopyId from './room/copy-id'
-import io from 'socket.io-client';
 import ChatBox from './chat/chat-box'
+import CopyId from './room/copy-id'
 import Users from './chat/users'
 
 
-function RoomAndChat() {
+function RoomAndChat({ socket, roomId }) {
     if (cookieExists('roomId')) {
-        const roomId = getCookie('roomId')
-        const socket = io.connect('/')
-        socket.roomId = roomId
-        
         socket.emit('join_room', { roomId: roomId })
-
         return (
             <>
                 <div class='roomAndChat'>
                     <br/>
-                    <ChatBox socket={socket} roomId={roomId}/>
+                    <ChatBox socket={socket}/>
                     <div>
-                        <Users class='users' socket={socket} roomId={roomId}/>
+                        <Users class='users' socket={socket}/>
                     </div>
                     <div>
-                        <LeaveRoom/>
+                        <LeaveRoom socket={socket} roomId={roomId}/>
                         <CopyId/>
                     </div>
                 </div>

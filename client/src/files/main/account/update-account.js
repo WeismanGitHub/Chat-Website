@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 const axios = require('axios').default;
 
-function UpdateAccount() {
+function UpdateAccount({ socket, roomId }) {
     const [user, setUser] = useState()
 
     useEffect(() => {
@@ -20,6 +20,7 @@ function UpdateAccount() {
     
     async function updateAccountHandler(event) {
         event.preventDefault();
+        socket.emit('update_users', { roomId: roomId })
         
         axios.post('/api/v1/user/update', {
             name: event.target[0].value,

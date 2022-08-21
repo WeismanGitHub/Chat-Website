@@ -4,14 +4,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import DeleteAccount from './account/delete-account'
 import Logout from './account/logout'
 
-function Account() {
+function Account({ socket, roomId }) {
     return (
         <div class='account'>
-            <UpdateAccount/>
+            <UpdateAccount socket={socket} roomId={roomId}/>
             <br/>
             <Logout/>
             <br/>
-            <DeleteAccount/>
+            <DeleteAccount socket={socket} roomId={roomId}/>
             <ToastContainer/>
         </div>
     )
