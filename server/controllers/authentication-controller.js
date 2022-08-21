@@ -46,11 +46,6 @@ const login = async (req, res) => {
 }
 
 const logout = async (req, res) => {
-    const roomId = req.cookies.roomId
-    if (roomId) {
-        await removeUserFromRoom(roomId, req.user._id)
-    }
-
     res.status(StatusCodes.OK)
     .deleteAllCookies()
     .redirect('/authentication')
