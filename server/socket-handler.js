@@ -9,6 +9,7 @@ function socketHandler(socket) {
         const { name } = jwt.verify(token, process.env.JWT_SECRET)
             
         socket.on('join_room', async (data) => {
+            console.log('join_room')
             const roomId = data.roomId
             socket.join(roomId)
 
@@ -18,6 +19,7 @@ function socketHandler(socket) {
         })
     
         socket.on('update_users', async (data) => {
+            console.log('update_users')
             const roomId = data.roomId
             const users = await getAllUsersInRoom(roomId)
             .catch(err => {
@@ -28,16 +30,18 @@ function socketHandler(socket) {
         })
     
         socket.on('send_message', (data) => {
+            console.log('send_message')
             socket.to(data.roomId).emit('receive_message', {...data, userName: name });
         });
     
         socket.on('leave_room', async (data) => {
+            console.log('leave_room')
             const roomId = data.roomId
 
             const users = await getAllUsersInRoom(roomId)
             socket.to(roomId).emit('send_users', users)
 
-            socket.to(roomId).emit('receive_message', { userName: name, message: 'Left!' })
+            socket.to(roomId).emit('receiveMessage', { userName: name, message: 'Left!' })
             socket.leave(roomId)
         })
     } catch(err) {

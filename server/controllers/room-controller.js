@@ -16,7 +16,7 @@ const createRoom = async (req, res) => {
         .redirect('/room')
     } catch(err) {
         if (err.message.includes('duplicate key error collection')) {
-            const oldRoomId = (await UserSchema.findById(userId).select('-_id roomId'))._id
+            const oldRoomId = (await UserSchema.findById(userId).select('-_id roomId')).roomId
             await removeUserFromRoom(oldRoomId, userId)
 
             const newRoomId = (await RoomSchema.create({ creatorId: userId }))._id
@@ -65,7 +65,12 @@ const joinRoom = async (req, res) => {
 }
 
 const leaveRoom = async (req, res) => {
-    await removeUserFromRoom(req.cookies.roomId, req.user._id)
+    const userId = req.user._id
+    const roomId = (await UserSchema.findById(userId).select('-_id roomId').lean())?.roomId
+
+    if (roomId) {
+        await removeUserFromRoom(roomId, userId)
+    }
 
     res.status(StatusCodes.OK)
     .clearCookie('roomId')

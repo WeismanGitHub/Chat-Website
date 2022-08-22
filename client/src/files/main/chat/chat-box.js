@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getCookie } from '../../../helpers'
 
-function ChatBox({ socket, gameId }) {
+function ChatBox({ socket, roomId }) {
     const [currentMessage, setCurrentMessage] = useState('')
     const [messages, setMessages] = useState([]);
 
@@ -19,7 +19,7 @@ function ChatBox({ socket, gameId }) {
     const sendMessage = async () => {
         if (currentMessage !== '') {
         const messageData = {
-            gameId: gameId,
+            roomId: roomId,
             message: currentMessage,
             auth: {
                 token: getCookie('token')

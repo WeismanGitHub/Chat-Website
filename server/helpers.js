@@ -15,7 +15,7 @@ async function getAllUsersInRoom(roomId) {
 async function removeUserFromRoom(roomId, userId) {
     const room = await RoomSchema.findOneAndUpdate(
         { _id: roomId },
-        { $pull: { usersIds: userId } },
+        { $pull: { userIds: userId } },
         { new: true }
     ).select('-_id userIds').lean()
 
