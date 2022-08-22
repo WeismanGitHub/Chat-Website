@@ -74,7 +74,7 @@ app.use(errorHandler)
 // start
 try {
     const port = process.env.PORT || 5000
-    mongoose.connect(process.env.LOCAL_MONGO_URI, { autoIndex: true })
+    mongoose.connect(process.env.MONGO_URI, { autoIndex: true })
     console.log('Connected to database...')
     server.listen(port, console.log(`Server is starting on ${port}...`));
 } catch (err) {
