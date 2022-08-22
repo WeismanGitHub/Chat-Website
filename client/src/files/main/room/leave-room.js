@@ -7,7 +7,7 @@ const axios = require('axios').default;
 function LeaveRoom({ socket, roomId }) {
     const navigate = useNavigate();
     function onClick(event) {
-        socket.emit('leave_room', { roomId: roomId})
+        socket.emit('leave_room', { roomId: roomId })
         event.preventDefault();
         axios.post('/api/v1/room/leave')
         .then(res => {
