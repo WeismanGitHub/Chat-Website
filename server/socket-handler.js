@@ -22,9 +22,7 @@ function socketHandler(socket) {
             console.log('update_users')
             const roomId = data.roomId
             const users = await getAllUsersInRoom(roomId)
-            .catch(err => {
-                console.log(err)
-            })
+
             console.log(roomId, users)
             socket.to(roomId).emit('send_users', users)
         })
@@ -36,16 +34,14 @@ function socketHandler(socket) {
     
         socket.on('leave_room', async (data) => {
             const roomId = data.roomId
-            await removeUserFromRoom(roomId, _id)
-            const users = await getAllUsersInRoom(roomId)
-            .catch(err => {
-                if (err.message.includes('Room does not exist.')) {
-                    socket.leave(roomId)
-                }
-            })
+            const roomExists = await removeUserFromRoom(roomId, _id)
+
+            if (roomExists) {
+                const users = await getAllUsersInRoom(roomId)
+                socket.to(roomId).emit('send_users', users)
+                socket.to(roomId).emit('receive_message', { userName: name, message: 'Left!' })
+            }
             
-            socket.to(roomId).emit('send_users', users)
-            socket.to(roomId).emit('receive_message', { userName: name, message: 'Left!' })
             socket.leave(roomId)
         })
     } catch(err) {

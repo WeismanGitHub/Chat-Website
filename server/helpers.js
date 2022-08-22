@@ -5,7 +5,7 @@ async function getAllUsersInRoom(roomId) {
     const userIds = (await RoomSchema.findById(roomId).select('-_id userIds').lean())?.userIds
     
     if (!userIds) {
-        throw new Error('Room does not exist.')
+        return console.log('Room does not exist.')
     }
 
     const userPromises = userIds.map(userId => UserSchema.findById(userId).select('-password').lean())
@@ -20,17 +20,21 @@ async function removeUserFromRoom(roomId, userId) {
     ).select('-_id userIds').lean()
 
     if (!room) {
-        throw new Error("Room doesn't exist.")
+        return console.log("Room doesn't exist.")
     }
 
-    if (!room.userIds.length) {
-        await RoomSchema.deleteOne( { _id: roomId })
-    }
-    
     await UserSchema.updateOne(
         { _id: userId },
         { $unset: { roomId: "" } }
     )
+
+    if (!room.userIds.length) {
+        await RoomSchema.deleteOne( { _id: roomId })
+        return false
+    } else {
+        return true
+    }
+    
 }
 
 module.exports = {
