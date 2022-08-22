@@ -1,11 +1,14 @@
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 
 const axios = require('axios').default;
 
-function UpdateAccount({ socket, roomId }) {
+function UpdateAccount() {
     const [user, setUser] = useState()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -20,12 +23,12 @@ function UpdateAccount({ socket, roomId }) {
     
     async function updateAccountHandler(event) {
         event.preventDefault();
-        socket.emit('update_users', { roomId: roomId })
         
         axios.post('/api/v1/user/update', {
             name: event.target[0].value,
             password: event.target[1].value
         }).then(res => {
+            navigate('/')
             setUser(res.data.user)
             toast('Account updated!')
         }).catch(err => {

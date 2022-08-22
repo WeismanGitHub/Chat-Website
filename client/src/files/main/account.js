@@ -7,7 +7,7 @@ import Logout from './account/logout'
 function Account({ socket, roomId }) {
     return (
         <div class='account'>
-            <UpdateAccount socket={socket} roomId={roomId}/>
+            <UpdateAccount/>
             <br/>
             <Logout/>
             <br/>
