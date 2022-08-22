@@ -14,7 +14,7 @@ function UpdateAccount() {
         const fetchUser = async () => {
             const res = await axios.get('/api/v1/user')
             .catch(err => {
-                toast.error(err.response.data.message)
+                console.log(err.message)
             })
             setUser(res.data.user)
         }

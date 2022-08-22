@@ -1,4 +1,4 @@
-import { cookieExists, getCookie } from '../../helpers'
+import { cookieExists } from '../../helpers'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CreateRoom from './room/create-room'
