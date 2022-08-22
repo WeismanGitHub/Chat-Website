@@ -26,7 +26,7 @@ function ChatBox({ socket, roomId }) {
             }
         };
 
-        socket.volatile.emit('send_message', messageData);
+        socket.emit('send_message', messageData);
         setMessages((list) => [...list, { message: currentMessage, userName: 'You' }]);
         setCurrentMessage('');
         }

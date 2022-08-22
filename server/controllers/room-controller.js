@@ -65,12 +65,7 @@ const joinRoom = async (req, res) => {
 }
 
 const leaveRoom = async (req, res) => {
-    const userId = req.user._id
-    const roomId = (await UserSchema.findById(userId).select('-_id roomId').lean())?.roomId
-
-    if (roomId) {
-        await removeUserFromRoom(roomId, userId)
-    }
+    // Removing user from room is in leave_room event in socket-handler.
 
     res.status(StatusCodes.OK)
     .clearCookie('roomId')

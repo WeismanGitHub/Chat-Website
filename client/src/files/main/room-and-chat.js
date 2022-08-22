@@ -18,7 +18,7 @@ function RoomAndChat({ socket, roomId }) {
                     <br/>
                     <ChatBox socket={socket} roomId={roomId}/>
                     <div>
-                        <Users class='users' socket={socket} roomId={roomId}/>
+                        <Users class='users' socket={socket}/>
                     </div>
                     <div>
                         <LeaveRoom socket={socket} roomId={roomId}/>

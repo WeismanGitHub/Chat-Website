@@ -1,4 +1,4 @@
-const { getAllUsersInRoom } = require('./helpers')
+const { getAllUsersInRoom, removeUserFromRoom } = require('./helpers')
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 
@@ -6,7 +6,7 @@ const cookie = require('cookie');
 function socketHandler(socket) {
     try {
         const { token } = cookie.parse(socket.handshake.headers.cookie ?? "")
-        const { name } = jwt.verify(token, process.env.JWT_SECRET)
+        const { name, _id } = jwt.verify(token, process.env.JWT_SECRET)
             
         socket.on('join_room', async (data) => {
             console.log('join_room')
@@ -25,7 +25,7 @@ function socketHandler(socket) {
             .catch(err => {
                 console.log(err)
             })
-    
+            console.log(roomId, users)
             socket.to(roomId).emit('send_users', users)
         })
     
@@ -35,13 +35,17 @@ function socketHandler(socket) {
         });
     
         socket.on('leave_room', async (data) => {
-            console.log('leave_room')
             const roomId = data.roomId
-
+            await removeUserFromRoom(roomId, _id)
             const users = await getAllUsersInRoom(roomId)
+            .catch(err => {
+                if (err.message.includes('Room does not exist.')) {
+                    socket.leave(roomId)
+                }
+            })
+            
             socket.to(roomId).emit('send_users', users)
-
-            socket.to(roomId).emit('receiveMessage', { userName: name, message: 'Left!' })
+            socket.to(roomId).emit('receive_message', { userName: name, message: 'Left!' })
             socket.leave(roomId)
         })
     } catch(err) {
