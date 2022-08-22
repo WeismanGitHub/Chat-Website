@@ -28,7 +28,7 @@ function UpdateAccount() {
             name: event.target[0].value,
             password: event.target[1].value
         }).then(res => {
-            navigate('/')
+            window.location.reload(false);
             setUser(res.data.user)
             toast('Account updated!')
         }).catch(err => {
