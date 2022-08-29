@@ -1,4 +1,3 @@
-const { removeUserFromRoom } = require('../helpers')
 const UserSchema = require('../schemas/user-schema')
 const { StatusCodes } = require('http-status-codes')
 
